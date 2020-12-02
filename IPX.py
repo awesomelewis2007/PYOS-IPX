@@ -1,5 +1,4 @@
 #ipx a mod for PYOS
-#frturing commands for severs
 
 import colour
 from colr import color

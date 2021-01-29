@@ -1,18 +1,28 @@
-#ipx a mod for PYOS
-
+from types import TracebackType
 import colour
 from colr import color
 adderss =None
 import socket
 import os
 import time
-os.system("cls")
 import socket 
+import platform
+
+
+#        ::::::::::: :::::::::  :::    :::          ::::::::   ::::::::  :::    ::: :::::::::   ::::::::  :::::::::: 
+#           :+:     :+:    :+: :+:    :+:         :+:    :+: :+:    :+: :+:    :+: :+:    :+: :+:    :+: :+:         
+#          +:+     +:+    +:+  +:+  +:+          +:+        +:+    +:+ +:+    +:+ +:+    +:+ +:+        +:+          
+#         +#+     +#++:++#+    +#++:+           +#++:++#++ +#+    +:+ +#+    +:+ +#++:++#:  +#+        +#++:++#      
+#        +#+     +#+         +#+  +#+                 +#+ +#+    +#+ +#+    +#+ +#+    +#+ +#+        +#+            
+#       #+#     #+#        #+#    #+#         #+#    #+# #+#    #+# #+#    #+# #+#    #+# #+#    #+# #+#             
+#  ########### ###        ###    ###          ########   ########   ########  ###    ###  ########  ##########       
+#                                                                                                                    
+#                             source code for ipx                                                                                       
 
 
 #==============================logos==============================
-def no_glitch():
-    print("""
+
+print("""
                                      ___  ________  ___    ___ 
                                     |\  \|\   __  \|\  \  /  /|
                                     \ \  \ \  \|\  \ \  \/  / /
@@ -38,7 +48,7 @@ def no_glitch():
 
 
 
-VER 4.5
+VER 5
     """)
 #======================================================
 
@@ -46,23 +56,12 @@ hostname = socket.gethostname()
 IPAddr = socket.gethostbyname(hostname) 
 
 #===================================================
-os.system("color 08")   
-no_glitch()
-os.system("color 08")
-time.sleep(0.4)
-os.system("color 07")
-time.sleep(0.4)
-os.system("color 0f")
 time.sleep(1)
+if platform.system() == "Windows":
+    os.system("cls")
+if platform.system() == "Linux":
+    os.system("clear")
 
-os.system("color 0f")
-time.sleep(0.4)
-os.system("color 07")
-time.sleep(0.4)
-os.system("color 08")
-os.system("cls")
-os.system("cls")
-os.system("color 07")
 #======================MAIN SCRIPT===============================
 
 
@@ -89,23 +88,30 @@ while True:
 
     if ipxcommand == "ip":
         print("[OUT]")
-        os.system("ipconfig")
-
+        if platform.system() == "Windows":
+            os.system("ipconfig")
+        if platform.system() == "Linux":
+            os.system("ifconfig")
 
 
     if ipxcommand == "ip all":
         print("[OUT]")
-        os.system(r"ipconfig /all")
+        if platform.system() == "Windows":
+            os.system(r"ipconfig /all")
+        if platform.system() == "Linux":
+            os.system("ifconfig")
 
 
 
     if ipxcommand == "ip renew":
         print("[OUT]")
-        try:
-            os.system("ipconfig /renew")
-        except:
-            print("[X] ERROR CANT RENEW IP")
-
+        if platform.system() == "Windows":
+            try:
+                os.system("ipconfig /renew")
+            except:
+                print("[X] ERROR CANT RENEW IP")
+        if platform.system() == "Linux":
+            print(":( sorry this command only works on windows im sorry.")
 
 
     if ipxcommand == "gdi": 
@@ -117,20 +123,28 @@ while True:
 
     if ipxcommand == "macinfo":
         print("[OUT]")
-        os.system("getmac")
+        if platform.system() == "Windows":
+            os.system("getmac")
+        if platform.system() == "Linux":
+            print(":( sorry this command only works on windows im sorry.")
 
 
 
     if ipxcommand == "fullmac":
         print("[OUT]")
-        os.system("getmac /v /fo list")
-
+        if platform.system() == "Windows":
+            os.system("getmac /v /fo list")
+        if platform.system() == "Linux":
+            print(":( sorry this command only works on windows im sorry.")
 
 
     if ipxcommand == "network":
         print("[OUT]")
         print("===================ipx list=============================")
-        os.system("NET VIEW")
+        if platform.system() == "Windows":
+            os.system("netlist")
+        if platform.system() == "Linux":
+            print(":( sorry this command only works on windows im sorry.")
 
 
 
@@ -139,12 +153,13 @@ while True:
         hostinputdir = input("[IN]hostdir>")
         print("[OUT]")
         try:
-            print(socket.gethostbyname(hostinputdir)) # your os sends out a dns query
+            print(color(socket.gethostbyname(hostinputdir),fore="green")) # your os sends out a dns query
         except:
-            print("[X] ERROR CANT SEND DNS")
+            print(color("[X] ERROR CANT SEND DNS",fore="red"))
 
     
     if ipxcommand == "urllook":
+        import datetime
         from urllib.request import Request, urlopen, urlretrieve
         from bs4 import BeautifulSoup
         import time
@@ -154,6 +169,7 @@ while True:
                 req = Request(url)
                 a = urlopen(req).read()
                 soup = BeautifulSoup(a, 'html.parser')
+                soup.head.append('body {background-color:#b0c4de;}')
                 x = (soup.find_all('a'))
                 print("=============================================")
                 time.sleep(0.3)
@@ -165,27 +181,140 @@ while True:
                         url_new = url_new.replace(" ","%20")
                         if(file_name[-1]=='/' and file_name[0]!='.'):
                             read_url(url_new)
-                        print(url_new)
+                        time.sleep(0.1)
+                        print(color(url_new,fore="green"))
                     except:
-                        print("[X] ERROR cant show URL!")
+                        print(color("[X] ERROR cant show URL!",fore="red"))
             except:
-                print("[X] ERROR forbidden or not a URL")
+                print(color("[X] ERROR forbidden or not a URL",fore="red"))
         urlinput = input("http url>")
         read_url(urlinput)
     if ipxcommand == "htmlrip":
         import requests
-        urlxxxx = input("URL>")
-        page = requests.get(urlxxxx)
-        contents = page.content
-        print(contents)
+        from bs4 import BeautifulSoup
+
+        URL = input("HTTP URL>")
+        try:
+            page = requests.get(URL)
+
+            soup = BeautifulSoup(page.content, 'html.parser')
+            head = soup.head
+            head.append(soup.new_tag('style', type='text/css'))
+            head.style.append('body {background-color:#b0c4de;}')
+            print(soup)
+
+        except ConnectionError:
+            print("[X] Connection or socket.server error")
+
+        except ConnectionAbortedError:
+            print("[X] connection or syntax error")
+
+    if ipxcommand == "isup": 
         
+        import requests
+        from collections import namedtuple
+        import time
+        WebsiteStatus = namedtuple('WebsiteStatus', ['status_code', 'reason'])
+        name = input("HTTP Domain>")
+        tryn = input("ping times>")
+        delay = input("ping delay>")
+        attempt = 1
+        try:
+            tryn = int(tryn)
+        except:
+            print(color("[!] couldn't convert varable",fore="yellow"))
+            print(color("[X] convertion error",fore="red"))
+            print(color("[X] fatal please enter an intager",fore="red"))
+            break
+        try:
+            delay = int(delay)
+        except:
+            print(color("[!] couldn't convert varable",fore="yellow"))
+            print(color("[X] convertion error",fore="red"))
+            print(color("[X] fatal please enter an intager",fore="red"))
+            break
 
+        print("==================ISUP========================")
+        print("Checking:",name)
+        print("From",hostname)
+        print("==============================================")
+        print(hostname,color("--->",fore="green"),name)
+        print("==============================================")
+    
+        def get_status(site):
+            time.sleep(delay)
+            try:
+                response = requests.head(site, timeout=5)
+                status_code = response.status_code
+                reason = response.reason
+            except requests.exceptions.ConnectionError:
+                status_code = '000'
+                reason = 'ConnectionError'
+            website_status = WebsiteStatus(status_code, reason)
+            return website_status
 
+        for i in range(tryn):
+            site = name
+            website_status = get_status(site)
+            print("{0:30} {1:10} {2:10}"
+                .format(site, website_status.status_code, website_status.reason))
 
+    if ipxcommand == "isup -s":
+        import requests
+        from collections import namedtuple
+        import time
+        WebsiteStatus = namedtuple('WebsiteStatus', ['status_code', 'reason'])
+        name = input("HTTP Domain>")
+        print("[OUT]")
+        try:
+            response = requests.head(name, timeout=5)
+            status_code = response.status_code
+            reason = response.reason
+        except requests.exceptions.ConnectionError:
+            status_code = '000'
+            reason = 'ConnectionError'
+        website_status = WebsiteStatus(status_code, reason)
 
+        print("The server",name,"is",reason)
 
+    if ipxcommand == "whois":
+        from ipwhois import IPWhois
 
+        import pprint
 
+        obj = IPWhois(input("IP>"))
+        import itertools
+        import threading
+        import time
+        import sys
+        import os
+        done = False
+        #here is the animation
+        def animate():
+            for c in itertools.cycle(['|', '/', '-', '\\']):
+                if done:
+                    break
+                sys.stdout.write('\rloading: ' + c)
+                sys.stdout.flush()
+                time.sleep(0.1)
+            sys.stdout.write('\r[OUT]')
+        t = threading.Thread(target=animate)
+        t.start()
+        results = obj.lookup_rdap(depth=1)
+        time.sleep(1)
+        done = True
+        
+        print("\n")
+        pprint.pp(results)
+      
+    if ipxcommand == "os":
+        print(platform.system())
+    
+    if ipxcommand == "cpu":
+        print(platform.processor())
+
+    if ipxcommand == "ver":
+        print(platform.version())
 
     if ipxcommand == "help":
         print("""
@@ -202,5 +331,13 @@ no|command    |description
 8 |fullmac    |displays the fullmac
 9 |network    |displays all of the users on your network
 10|iplook     |gets an ip from a host name
-11|urllook    |looks up all the sub urls in a http       
+11|urllook    |looks up all the sub urls in a http   
+12|htmlrip    |rips html off websites    
+13|isup       |checks if a domain is up
+14|isup -s    |checks if a domain is up ina nicer veiw
+15|whois      |find out who's who with an ip
+16|os         |find out what os type you have
+17|cpu        |find out what cpu type you have
+18|ver        |Returns the system's release version
+=======================================================
         """)

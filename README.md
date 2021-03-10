@@ -1,6 +1,6 @@
 # PYOS-IPX
 
-## VER 5.0.0 IS HERE
+## VER 5.1.0 IS HERE
 
 what is IPX then?
 
@@ -50,25 +50,10 @@ if you need this list just type help
 
 # installing
 
-you will need these pakages and you can only run this on linux and windows
+you can install IPX by running
 
-```
-types
-colour
-colr
-socket
-os
-time
-platform
-datetime
-urlib.request
-bs4
-pprint
-requests
-itertools
-threading
-sys
-```
+`bash install.bash`
+
 
 if you need any help just ping me in my discod server : https://discord.gg/NpgdEZ8bjK
 

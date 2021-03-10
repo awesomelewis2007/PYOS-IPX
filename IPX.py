@@ -18,8 +18,8 @@ import platform
 #  ########### ###        ###    ###          ########   ########   ########  ###    ###  ########  ##########       
 #                                                                                                                    
 #                             source code for ipx                                                                                       
-
-
+#
+#
 #==============================logos==============================
 
 print("""
@@ -48,7 +48,7 @@ print("""
 
 
 
-VER 5
+VER 5.2
     """)
 #======================================================
 
@@ -209,6 +209,32 @@ while True:
         except ConnectionAbortedError:
             print("[X] connection or syntax error")
 
+    if ipxcommand == "filefind":    
+        import requests
+        from bs4 import BeautifulSoup
+
+        def get_url_paths(url, ext='', params={}):
+            try:
+                response = requests.get(url, params=params)
+                if response.ok:
+                    response_text = response.text
+                else:
+                    return response.raise_for_status()
+                soup = BeautifulSoup(response_text, 'html.parser')
+                parent = [url + node.get('href') for node in soup.find_all('a') if node.get('href').endswith(ext)]
+                return parent
+            except:
+                print("[x] error")
+
+
+        url =  input("[IN] domain:")
+        ext =  input("[IN]File_ext:")
+        result = get_url_paths(url, ext)
+        if result != "None":
+            print(result)
+        if result == "None":
+            pass
+
     if ipxcommand == "isup": 
         
         import requests
@@ -339,5 +365,6 @@ no|command    |description
 16|os         |find out what os type you have
 17|cpu        |find out what cpu type you have
 18|ver        |Returns the system's release version
+19|filefind   |Returns a url where a extention is of your choice
 =======================================================
         """)

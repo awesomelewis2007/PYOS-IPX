@@ -18,7 +18,7 @@ for example if i want to get the the ip of google you just simply type
 =============================================
 ```
 
-and there it is there are a total of 18 commands 
+and there it is there are a total of 19 commands 
 
 ```
 =======================ipx help========================
@@ -34,14 +34,15 @@ no|command    |description
 8 |fullmac    |displays the fullmac
 9 |network    |displays all of the users on your network
 10|iplook     |gets an ip from a host name
-11|urllook    |looks up all the sub urls in a http
-12|htmlrip    |rips html off websites
+11|urllook    |looks up all the sub urls in a http   
+12|htmlrip    |rips html off websites    
 13|isup       |checks if a domain is up
 14|isup -s    |checks if a domain is up ina nicer veiw
 15|whois      |find out who's who with an ip
 16|os         |find out what os type you have
 17|cpu        |find out what cpu type you have
 18|ver        |Returns the system's release version
+19|filefind   |Returns a url where a extention is of your choice
 =======================================================
 
 ```

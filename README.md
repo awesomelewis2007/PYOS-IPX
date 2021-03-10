@@ -1,6 +1,6 @@
 # PYOS-IPX
 
-## VER 5.1.0 IS HERE
+## VER 5.2.0 IS HERE
 
 what is IPX then?
 
